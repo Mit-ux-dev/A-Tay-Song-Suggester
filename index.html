@@ -158,6 +158,7 @@
         .album:nth-child(9) { animation-delay: 1.6s; }
         .album:nth-child(10) { animation-delay: 1.8s; }
         .album:nth-child(11) { animation-delay: 2s; }
+        .album:nth-child(12) { animation-delay: 2.2s; }
         @media (max-width: 600px) {
             .album {
                 width: 40px;
@@ -193,6 +194,7 @@
         <img class="album" src="https://i.scdn.co/image/ab67616d0000b27333b8541201f1ef38941024be" alt="evermore">
         <img class="album" src="https://i.scdn.co/image/ab67616d00001e02bb54dde68cd23e2a268ae0f5" alt="Midnights">
         <img class="album" src="https://i.scdn.co/image/ab67616d00001e02fb3cda178f23d8326be8fdbe" alt="The Tortured Poets Department">
+        <img class="album" src="https://admin-images.nyc3.cdn.digitaloceanspaces.com/c1c0d73523-1755222997898" alt="The Life of a Showgirl">
     </div>
     <div class="controls">
         <select id="albumSelect">
@@ -208,6 +210,7 @@
             <option value="evermore">evermore</option>
             <option value="Midnights">Midnights</option>
             <option value="The Tortured Poets Department">The Tortured Poets Department</option>
+            <option value="The Life of a Showgirl">The Life of a Showgirl</option>
             <option value="Other Songs">Other Songs</option>
         </select>
         <button onclick="suggestSong()">Get a Song Suggestion</button>
@@ -330,6 +333,13 @@
                     "Robin", "The Manuscript"
                 ],
                 image: "https://i.scdn.co/image/ab67616d00001e02fb3cda178f23d8326be8fdbe"
+            },                    
+                "The Life of a Showgirl": {
+                songs: [            
+                    "The Fate of Ophelia", "Elizabeth Taylor", "Opalite", "Father Figure", "Eldest Daughter", "Ruin the Friendship", 
+                    "Actually Romantic", "Wi$h Li$t", "Wood", "Cancelled!", "Honey", "The Life of a Showgirl"
+                ],
+                image: "https://admin-images.nyc3.cdn.digitaloceanspaces.com/c1c0d73523-1755222997898"
             },
             "Other Songs": {
                 songs: [
@@ -337,7 +347,7 @@
                     "Crazier", "Today Was a Fairytale", "Eyes Open", "Sweeter Than Fiction", "Only the Young",
                     "Carolina", "Beautiful Ghosts", "American Girl", "Christmas Tree Farm", "Macavity"
                 ],
-                image: "https://i.ibb.co/F4KkbgxQ/6285138339787032569.jpg"            }
+                image: "https://i.ibb.co/F4KkbgxQ/6285138339787032569.jpg"
         };
 
         function suggestSong() {
