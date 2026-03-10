@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taylor Swift Random Song Suggester</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f0f0f0;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    background-image: url("IMG_0315.PNG"); /* change extension if needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    background-color: rgba(0,0,0,0.4);
+    background-blend-mode: darken;
+
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
             color: #333;
             margin: 0;
             padding: 20px;
@@ -15,9 +32,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0, #f0f0f0, #e0e0e0);
-            background-size: 400%;
-            animation: gradientBG 15s ease infinite;
+
         }
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
@@ -221,6 +236,8 @@
             <div class="song-name" id="songName"></div>
             <div class="singer-name">Taylor Swift</div>
             <div class="album-name" id="albumName"></div>
+
+            <div id="spotifyPlayer" style="margin-top:15px;"></div>
         </div>
         <div class="error-message" id="errorMessage"></div>
     </div>
@@ -352,34 +369,61 @@
         };
 
         function suggestSong() {
-            const albumSelect = document.getElementById("albumSelect");
-            const musicPlayer = document.getElementById("musicPlayer");
-            const albumArt = document.getElementById("albumArt");
-            const songName = document.getElementById("songName");
-            const albumName = document.getElementById("albumName");
-            const errorMessage = document.getElementById("errorMessage");
-            const selectedAlbum = albumSelect.value;
+    const albumSelect = document.getElementById("albumSelect");
+    const musicPlayer = document.getElementById("musicPlayer");
+    const albumArt = document.getElementById("albumArt");
+    const songName = document.getElementById("songName");
+    const albumName = document.getElementById("albumName");
+    const errorMessage = document.getElementById("errorMessage");
+    const spotifyPlayer = document.getElementById("spotifyPlayer");
 
-            // Reset displays
-            musicPlayer.style.display = "none";
-            errorMessage.textContent = "";
+    const selectedAlbum = albumSelect.value;
 
-            if (!selectedAlbum) {
-                errorMessage.textContent = "Please select an album!";
-                return;
-            }
+    musicPlayer.style.display = "none";
+    errorMessage.textContent = "";
+    spotifyPlayer.innerHTML = "";
 
-            const album = albums[selectedAlbum];
-            const randomSong = album.songs[Math.floor(Math.random() * album.songs.length)];
+    if (!selectedAlbum) {
+        errorMessage.textContent = "Please select an album!";
+        return;
+    }
 
-            // Update music player content
-            albumArt.src = album.image;
-            albumArt.alt = selectedAlbum;
-            songName.textContent = randomSong;
-            albumName.textContent = selectedAlbum;
+    const album = albums[selectedAlbum];
 
-            // Show music player
-            musicPlayer.style.display = "block";
+    if (!album) {
+        errorMessage.textContent = "Album not found!";
+        return;
+    }
+
+    const randomSong =
+        album.songs[Math.floor(Math.random() * album.songs.length)];
+
+    albumArt.src = album.image;
+    albumArt.alt = selectedAlbum;
+    songName.textContent = randomSong;
+    albumName.textContent = selectedAlbum;
+
+    const searchQuery = encodeURIComponent(randomSong + " Taylor Swift");
+
+spotifyPlayer.innerHTML = `
+<a 
+href="https://open.spotify.com/search/${searchQuery}" 
+target="_blank"
+style="
+display:inline-block;
+margin-top:10px;
+padding:10px 15px;
+background:#1DB954;
+color:white;
+border-radius:20px;
+text-decoration:none;
+font-weight:bold;
+">
+🎧 Play on Spotify
+</a>
+`;
+
+    musicPlayer.style.display = "block";
         }
     </script>
 </body>
